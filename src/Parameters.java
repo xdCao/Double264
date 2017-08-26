@@ -7,5 +7,11 @@ public interface Parameters {
     int timeOut=60000;//单位毫秒，共享内存超时
     String MEMORY_NAME="pano_player_share_mem1";//共享内存名称
 
+    int PORT1=9995;
+    int PORT2=9996;
+
+    String IP1="127.0.0.1";
+    String IP2="127.0.0.1";
+
 
 }

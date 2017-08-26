@@ -3,6 +3,7 @@ import com.pisoft.sharememory.ShareMemory;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -25,34 +26,28 @@ public class Sender {
         }
 
         try {
-            socket1=new Socket("127.0.0.1",9995);
-            socket2=new Socket("127.0.0.1",9996);
+            socket1=new Socket(Parameters.IP1,Parameters.PORT1);
+            socket2=new Socket(Parameters.IP2,Parameters.PORT2);
         } catch (IOException e) {
             System.err.println("socket连接失败，请检查网络");
         }
 
     }
 
-    private void readByteFromMemory() {
-        byte[] buffer=null;
-        int tag=0;
+    public void readByteFromMemory() {
+        new ReadMemoryThread(shareMemory,queue).start();
+    }
 
-        while (true){
-            buffer=new byte[Parameters.memSize];
-            int read = shareMemory.Read(buffer, Parameters.memSize);
-            System.out.println("read bytes from sharedMemory: "+read+"tag: "+tag);
-            DataPacket dataPacket=new DataPacket();
-            dataPacket.setTag(tag++);
-            dataPacket.setDataSize(read);
-            dataPacket.setDataBytes(buffer);
-            queue.add(dataPacket);
-        }
+    public void sendPacket2Air(){
+        new SendingThread(queue,socket1).start();
+        new SendingThread(queue,socket2).start();
     }
 
     public static void main(String[] args) throws InterruptedException {
         Sender sender=new Sender();
         sender.init();
         sender.readByteFromMemory();
+        sender.sendPacket2Air();
     }
 
 
