@@ -1,6 +1,7 @@
 import sun.rmi.transport.tcp.TCPTransport;
 
 import javax.xml.crypto.Data;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -23,19 +24,17 @@ public class RecvingThread extends Thread {
 
     @Override
     public void run() {
-        ObjectInputStream ois=null;
         try {
+            DataOutputStream dos=new DataOutputStream(socket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            dos.writeInt(1);
+            dos.flush();
             while (true){
-//                if (ois.available()>0){
-                    ois=new ObjectInputStream(socket.getInputStream());
-//                    System.out.println("some data is available!!");
-                    DataPacket dataPacket=(DataPacket)ois.readObject();
-                    hashMap.put(dataPacket.getTag(),dataPacket);
-//                }
+                DataPacket dataPacket=(DataPacket)ois.readObject();
+                hashMap.put(dataPacket.getTag(),dataPacket);
+                dos.writeInt(1);
+                dos.flush();
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

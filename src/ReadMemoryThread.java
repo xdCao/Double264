@@ -24,7 +24,7 @@ public class ReadMemoryThread extends Thread {
         while (true){
             buffer=new byte[Parameters.memSize];
             int read = shareMemory.Read(buffer, Parameters.memSize);
-            System.out.println("read bytes from sharedMemory: "+read+"tag: "+tag);
+//            System.out.println("read bytes from sharedMemory: "+read+"tag: "+tag);
             DataPacket dataPacket=new DataPacket();
             dataPacket.setTag(tag);
             tag++;

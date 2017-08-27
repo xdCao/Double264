@@ -1,3 +1,4 @@
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,29 +20,28 @@ public class SendingThread extends Thread {
     @Override
     public void run() {
         System.out.println("进入线程: "+this.getId());
-        while (true){
-            synchronized (concurrentLinkedQueue){
-                if (!concurrentLinkedQueue.isEmpty()){
-                    DataPacket dataPacket=concurrentLinkedQueue.poll();
-                    ObjectOutputStream oos=null;
-                    try {
-                        oos=new ObjectOutputStream(socket.getOutputStream());
+        DataInputStream dis=null;
+        ObjectOutputStream oos=null;
+        try {
+            dis=new DataInputStream(socket.getInputStream());
+            oos=new ObjectOutputStream(socket.getOutputStream());
+            while (true) {
+
+                if (!concurrentLinkedQueue.isEmpty()) {
+                    int flag=dis.readInt();
+                    if (flag==1){
+                        flag=0;
+                        DataPacket dataPacket = concurrentLinkedQueue.poll();
                         oos.writeObject(dataPacket);
                         oos.flush();
-//                        System.out.println("发送对象： "+dataPacket.getTag());
-                    } catch (IOException e) {
-                        System.err.println("data trans err!");
-                        try {
-                            oos.close();
-                            socket.close();
-                        } catch (IOException e1) {
-                            System.err.println("err in closing stream!");
-                        }
+                        System.out.println("线程" + this.getId() + "发送对象： " + dataPacket.getTag());
                     }
-
                 }
-            }
 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 }
