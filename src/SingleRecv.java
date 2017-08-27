@@ -7,14 +7,12 @@ import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by xdcao on 2017/8/26.
+ * Created by xdcao on 2017/8/27.
  */
-public class Recver {
+public class SingleRecv {
 
     private ServerSocket serverSocket1=null;
-    private ServerSocket serverSocket2=null;
     private Socket socket1=null;
-    private Socket socket2=null;
     private ShareMemory shareMemory=null;
 
     private File file=null;
@@ -32,10 +30,8 @@ public class Recver {
 
         try {
             serverSocket1=new ServerSocket(Parameters.PORT1);
-            serverSocket2=new ServerSocket(Parameters.PORT2);
             socket1=serverSocket1.accept();
-            socket2=serverSocket2.accept();
-            if (socket1!=null&&socket2!=null){
+            if (socket1!=null){
                 System.out.println("连接成功");
             }
         } catch (IOException e) {
@@ -43,7 +39,7 @@ public class Recver {
             return false;
         }
 
-        if (socket1!=null&&socket2!=null){
+        if (socket1!=null){
             file=new File("video.264");
         }
 
@@ -53,7 +49,6 @@ public class Recver {
 
     public void recv2HashMap(){
         new RecvingThread(socket1,hashMap).start();
-        new RecvingThread(socket2,hashMap).start();
     }
 
 
@@ -63,12 +58,11 @@ public class Recver {
 
 
     public static void main(String[] args) {
-        Recver recver=new Recver();
-        if (recver.init()){
-            recver.recv2HashMap();
-            recver.write2File();
+        SingleRecv singleRecv=new SingleRecv();
+        if (singleRecv.init()){
+            singleRecv.recv2HashMap();
+            singleRecv.write2File();
         }
     }
-
 
 }

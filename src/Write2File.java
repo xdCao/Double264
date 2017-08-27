@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.pisoft.sharememory.ShareMemory;
+
+import java.io.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -13,11 +12,14 @@ public class Write2File extends Thread {
 
     private File file=null;
 
+    private ShareMemory shareMemory;
+
     private volatile int waitingNum=0;
 
-    public Write2File(ConcurrentHashMap<Integer, DataPacket> hashMap, File file) {
+    public Write2File(ConcurrentHashMap<Integer, DataPacket> hashMap, File file,ShareMemory shareMemory) {
         this.hashMap = hashMap;
         this.file = file;
+        this.shareMemory=shareMemory;
     }
 
     @Override
@@ -29,9 +31,10 @@ public class Write2File extends Thread {
                 if (hashMap.containsKey(waitingNum)){
                     DataPacket dataPacket=hashMap.get(waitingNum);
                     if (dataPacket.getDataSize()>0){
-                        fos.write(dataPacket.getDataBytes());
-                        fos.flush();
-                        System.out.println("第"+waitingNum+"个包接收完毕"+"size: "+dataPacket.getDataSize());
+//                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
+//                        fos.flush();
+                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
+                        System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
                     }
 
                     waitingNum++;
