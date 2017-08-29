@@ -1,7 +1,9 @@
 import com.pisoft.sharememory.ShareMemory;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -16,7 +18,7 @@ public class Sender {
     private Socket socket2=null;
     private ConcurrentLinkedQueue<DataPacket> queue=new ConcurrentLinkedQueue<DataPacket>();
 
-    public void init() throws InterruptedException {
+    public void initTCP() throws InterruptedException {
 
 
         shareMemory=new ShareMemory();
@@ -34,20 +36,23 @@ public class Sender {
 
     }
 
+
     public void readByteFromMemory() {
         new ReadMemoryThread(shareMemory,queue).start();
     }
 
-    public void sendPacket2Air(){
+    public void sendPacket2AirTCP(){
         new SendingThread(queue,socket1).start();
         new SendingThread(queue,socket2).start();
     }
 
+
+
     public static void main(String[] args) throws InterruptedException {
         Sender sender=new Sender();
-        sender.init();
+        sender.initTCP();
         sender.readByteFromMemory();
-        sender.sendPacket2Air();
+        sender.sendPacket2AirTCP();
     }
 
 

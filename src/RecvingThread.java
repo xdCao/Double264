@@ -25,15 +25,15 @@ public class RecvingThread extends Thread {
     @Override
     public void run() {
         try {
-            DataOutputStream dos=new DataOutputStream(socket.getOutputStream());
+//            DataOutputStream dos=new DataOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            dos.writeInt(1);
-            dos.flush();
+//            dos.writeInt(1);
+//            dos.flush();
             while (true){
                 DataPacket dataPacket=(DataPacket)ois.readObject();
                 hashMap.put(dataPacket.getTag(),dataPacket);
-                dos.writeInt(1);
-                dos.flush();
+//                dos.writeInt(1);
+//                dos.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,8 @@
 import com.pisoft.sharememory.ShareMemory;
+import com.sun.beans.editors.ByteEditor;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -18,19 +21,37 @@ public class ReadMemoryThread extends Thread {
 
     @Override
     public void run() {
-        byte[] buffer=null;
+        byte[] buffer=new byte[Parameters.memSize];
+        int count=0;
         int tag=0;
 
         while (true){
-            buffer=new byte[Parameters.memSize];
-            int read = shareMemory.Read(buffer, Parameters.memSize);
+            byte[] temp=new byte[Parameters.memSize];
+            int read = shareMemory.Read(temp, Parameters.memSize);
+            if (read<0){
+                break;
+            }
+            Utils.byteMerger(buffer,temp);
+            count++;
+            if (count>=10){
+                DataPacket dataPacket=new DataPacket();
+                dataPacket.setTag(tag);
+                tag++;
+                dataPacket.setDataSize(read);
+                dataPacket.setDataBytes(buffer);
+                queue.add(dataPacket);
+                count=0;
+            }
+
 //            System.out.println("read bytes from sharedMemory: "+read+"tag: "+tag);
-            DataPacket dataPacket=new DataPacket();
-            dataPacket.setTag(tag);
-            tag++;
-            dataPacket.setDataSize(read);
-            dataPacket.setDataBytes(buffer);
-            queue.add(dataPacket);
+
+
         }
+
+        System.out.println("something is wrong or data has been finished!!!");
+
     }
+
+
+
 }

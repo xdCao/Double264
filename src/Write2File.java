@@ -31,9 +31,9 @@ public class Write2File extends Thread {
                 if (hashMap.containsKey(waitingNum)){
                     DataPacket dataPacket=hashMap.get(waitingNum);
                     if (dataPacket.getDataSize()>0){
-                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
-                        fos.flush();
-//                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
+//                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
+//                        fos.flush();
+                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
                         System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
                         hashMap.remove(waitingNum);
                     }

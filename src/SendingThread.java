@@ -23,20 +23,26 @@ public class SendingThread extends Thread {
         DataInputStream dis=null;
         ObjectOutputStream oos=null;
         try {
-            dis=new DataInputStream(socket.getInputStream());
+
             oos=new ObjectOutputStream(socket.getOutputStream());
             while (true) {
 
+                DataPacket dataPacket=null;
                 if (!concurrentLinkedQueue.isEmpty()) {
-                    int flag=dis.readInt();
-                    if (flag==1){
-                        flag=0;
-                        DataPacket dataPacket = concurrentLinkedQueue.poll();
-                        oos.writeObject(dataPacket);
-                        oos.flush();
-                        System.out.println("线程" + this.getId() + "发送对象： " + dataPacket.getTag());
-                    }
+                        dataPacket = concurrentLinkedQueue.poll();
                 }
+
+                if (dataPacket!=null){
+                    oos.writeObject(dataPacket);
+                    oos.flush();
+                    System.out.println("线程" + this.getId() + "发送对象： " + dataPacket.getTag());
+                }
+
+//                try {
+//                    Thread.sleep(10);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
 
             }
         } catch (IOException e) {

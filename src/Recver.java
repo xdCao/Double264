@@ -25,10 +25,10 @@ public class Recver {
 
         shareMemory=new ShareMemory();
 
-//        int ret=shareMemory.Init(Parameters.MEMORY_NAME_RECV,false,Parameters.timeOut,Parameters.memSize);
-//        if (ret<0){
-//            System.err.println("接收共享内存出错");
-//        }
+        int ret=shareMemory.Init(Parameters.MEMORY_NAME_RECV,false,Parameters.timeOut,Parameters.memSize);
+        if (ret<0){
+            System.err.println("接收共享内存出错");
+        }
 
         try {
             serverSocket1=new ServerSocket(Parameters.PORT1);
