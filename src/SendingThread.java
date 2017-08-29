@@ -28,9 +28,13 @@ public class SendingThread extends Thread {
             while (true) {
 
                 DataPacket dataPacket=null;
-                if (!concurrentLinkedQueue.isEmpty()) {
+
+                synchronized (concurrentLinkedQueue){
+                    if (!concurrentLinkedQueue.isEmpty()) {
                         dataPacket = concurrentLinkedQueue.poll();
+                    }
                 }
+
 
                 if (dataPacket!=null){
                     oos.writeObject(dataPacket);
