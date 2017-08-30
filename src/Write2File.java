@@ -16,7 +16,8 @@ public class Write2File extends Thread {
 
     private volatile int waitingNum=0;
 
-    public Write2File(ConcurrentHashMap<Integer, DataPacket> hashMap, File file,ShareMemory shareMemory) {
+
+    public Write2File(ConcurrentHashMap<Integer, DataPacket> hashMap, File file, ShareMemory shareMemory) {
         this.hashMap = hashMap;
         this.file = file;
         this.shareMemory=shareMemory;
@@ -28,19 +29,32 @@ public class Write2File extends Thread {
         try {
            fos=new FileOutputStream(file);
             while (true){
-                if (hashMap.containsKey(waitingNum)){
+
+                while (hashMap.containsKey(waitingNum)){
                     DataPacket dataPacket=hashMap.get(waitingNum);
                     if (dataPacket.getDataSize()>0){
-//                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
-//                        fos.flush();
+                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
+                        fos.flush();
                         shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
                         System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
                         hashMap.remove(waitingNum);
                     }
-
                     waitingNum++;
                 }
+
+                synchronized (Lock.class)
+                {
+                    try {
+                        Lock.class.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }

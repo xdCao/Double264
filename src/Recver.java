@@ -1,4 +1,5 @@
 import com.pisoft.sharememory.ShareMemory;
+import com.sun.org.apache.bcel.internal.generic.LoadClass;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,9 +44,9 @@ public class Recver {
             return false;
         }
 
-        if (socket1!=null&&socket2!=null){
-            file=new File("video.264");
-        }
+//        if (socket1!=null&&socket2!=null){
+//            file=new File("video.264");
+//        }
 
         return true;
 

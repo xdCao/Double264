@@ -1,7 +1,4 @@
-import sun.rmi.transport.tcp.TCPTransport;
-
-import javax.xml.crypto.Data;
-import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -17,6 +14,7 @@ public class RecvingThread extends Thread {
     private ConcurrentHashMap<Integer,DataPacket> hashMap=null;
 
 
+
     public RecvingThread(Socket socket, ConcurrentHashMap<Integer, DataPacket> hashMap) {
         this.socket = socket;
         this.hashMap = hashMap;
@@ -25,15 +23,19 @@ public class RecvingThread extends Thread {
     @Override
     public void run() {
         try {
-//            DataOutputStream dos=new DataOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-//            dos.writeInt(1);
-//            dos.flush();
             while (true){
                 DataPacket dataPacket=(DataPacket)ois.readObject();
+                System.out.println("--------------------网络接受包序号："+dataPacket.getTag());
                 hashMap.put(dataPacket.getTag(),dataPacket);
-//                dos.writeInt(1);
-//                dos.flush();
+
+                synchronized (Lock.class){
+                    try {
+                        Lock.class.notifyAll();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,4 +45,5 @@ public class RecvingThread extends Thread {
 
 
     }
+
 }

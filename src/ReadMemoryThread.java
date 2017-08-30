@@ -3,6 +3,8 @@ import com.sun.beans.editors.ByteEditor;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -21,37 +23,41 @@ public class ReadMemoryThread extends Thread {
 
     @Override
     public void run() {
-        byte[] buffer=new byte[Parameters.memSize];
-        int count=0;
-        int tag=0;
+        byte[] buffer = null;
+        int tag = 0;
 
-        while (true){
-            byte[] temp=new byte[Parameters.memSize];
-            int read = shareMemory.Read(temp, Parameters.memSize);
-            if (read<0){
-                break;
+
+        while (true) {
+            buffer = new byte[Parameters.memSize];
+            byte[] buffer1 = new byte[1024 * 1024];
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int count = 0;
+            int length = 0;
+            int read = 0;
+
+            while (count < 10)//拼接
+            {
+                read = shareMemory.Read(buffer, Parameters.memSize);
+
+                System.arraycopy(buffer, 0, buffer1, length, read);
+                length = length + read;
+                count++;
             }
-            Utils.byteMerger(buffer,temp);
-            count++;
-            if (count>=10){
-                DataPacket dataPacket=new DataPacket();
+            baos.write(buffer1, 0, length);
+
+            if (length > 0) {
+                DataPacket dataPacket = new DataPacket();
                 dataPacket.setTag(tag);
-                tag++;
-                dataPacket.setDataSize(read);
-                dataPacket.setDataBytes(buffer);
+                dataPacket.setDataSize(length);
+                dataPacket.setDataBytes(baos.toByteArray());
                 queue.add(dataPacket);
-                count=0;
+                tag++;
+                System.out.println("queue add new packet" + dataPacket.getTag());
             }
-
-//            System.out.println("read bytes from sharedMemory: "+read+"tag: "+tag);
 
 
         }
 
-        System.out.println("something is wrong or data has been finished!!!");
-
     }
-
-
 
 }

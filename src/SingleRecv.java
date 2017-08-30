@@ -48,12 +48,12 @@ public class SingleRecv {
     }
 
     public void recv2HashMap(){
-        new RecvingThread(socket1,hashMap).start();
+//        new RecvingThread(socket1,hashMap).start();
     }
 
 
     public void write2File(){
-        new Write2File(hashMap,file,shareMemory).start();
+//        new Write2File(hashMap,file,shareMemory).start();
     }
 
 
