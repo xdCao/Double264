@@ -21,33 +21,32 @@ public class ReadMemoryThread extends Thread {
 
     @Override
     public void run() {
-        byte[] buffer = null;
+        byte[] buffer = new byte[Parameters.memSize];
         int tag = 0;
 
 
         while (true) {
-            buffer = new byte[Parameters.memSize];
-            byte[] buffer1 = new byte[1024 * 1024];
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int count = 0;
-            int length = 0;
-            int read = 0;
+//            byte[] buffer1 = new byte[1024 * 1024];
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            int count = 0;
+//            int length = 0;
+//            int read = 0;
 
-            while (count < Parameters.SPLIT)//拼接
-            {
-                read = shareMemory.Read(buffer, Parameters.memSize);
+//            while (count < Parameters.SPLIT)//拼接
+//            {
+               int read = shareMemory.Read(buffer, Parameters.memSize);
 
-                System.arraycopy(buffer, 0, buffer1, length, read);
-                length = length + read;
-                count++;
-            }
-            baos.write(buffer1, 0, length);
+//                System.arraycopy(buffer, 0, buffer1, length, read);
+//                length = length + read;
+//                count++;
+//            }
+//            baos.write(buffer1, 0, length);
 
-            if (length > 0) {
+            if (read > 0) {
                 DataPacket dataPacket = new DataPacket();
                 dataPacket.setTag(tag);
-                dataPacket.setDataSize(length);
-                dataPacket.setDataBytes(baos.toByteArray());
+                dataPacket.setDataSize(read);
+                dataPacket.setDataBytes(buffer);
                 queue.add(dataPacket);
                 tag++;
                 System.out.println("queue add new packet" + dataPacket.getTag());
