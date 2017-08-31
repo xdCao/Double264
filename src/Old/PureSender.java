@@ -1,11 +1,10 @@
+package Old;
+
 import com.pisoft.sharememory.ShareMemory;
-import com.sun.xml.internal.bind.v2.model.annotation.RuntimeAnnotationReader;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Created by xdcao on 2017/8/30.

@@ -1,24 +1,21 @@
+package Old;
+
 import com.pisoft.sharememory.ShareMemory;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
 import java.net.Socket;
-import java.net.SocketException;
-import java.nio.channels.SocketChannel;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Created by xdcao on 2017/8/26.
+ * Created by xdcao on 2017/8/27.
  */
-public class Sender {
+public class SingleSender {
 
     private ShareMemory shareMemory=null;
     private Socket socket1=null;
-    private Socket socket2=null;
     private ConcurrentLinkedQueue<DataPacket> queue=new ConcurrentLinkedQueue<DataPacket>();
 
-    public void initTCP() throws InterruptedException {
+    public void init() throws InterruptedException {
 
 
         shareMemory=new ShareMemory();
@@ -29,31 +26,25 @@ public class Sender {
 
         try {
             socket1=new Socket(Parameters.IP1,Parameters.PORT1);
-            socket2=new Socket(Parameters.IP2,Parameters.PORT2);
         } catch (IOException e) {
             System.err.println("socket连接失败，请检查网络");
         }
 
     }
 
-
     public void readByteFromMemory() {
         new ReadMemoryThread(shareMemory,queue).start();
     }
 
-    public void sendPacket2AirTCP(){
+    public void sendPacket2Air(){
         new SendingThread(queue,socket1).start();
-        new SendingThread(queue,socket2).start();
     }
-
-
 
     public static void main(String[] args) throws InterruptedException {
-        Sender sender=new Sender();
-        sender.initTCP();
-        sender.readByteFromMemory();
-        sender.sendPacket2AirTCP();
+        SingleSender singleSender=new SingleSender();
+        singleSender.init();
+        singleSender.readByteFromMemory();
+        singleSender.sendPacket2Air();
     }
-
 
 }

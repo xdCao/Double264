@@ -1,10 +1,8 @@
-import com.pisoft.sharememory.ShareMemory;
-import com.sun.beans.editors.ByteEditor;
+package Old;
 
-import java.io.BufferedInputStream;
+import com.pisoft.sharememory.ShareMemory;
+
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -35,7 +33,7 @@ public class ReadMemoryThread extends Thread {
             int length = 0;
             int read = 0;
 
-            while (count < 10)//拼接
+            while (count < Parameters.SPLIT)//拼接
             {
                 read = shareMemory.Read(buffer, Parameters.memSize);
 

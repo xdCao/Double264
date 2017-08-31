@@ -1,3 +1,5 @@
+package Old;
+
 import com.pisoft.sharememory.ShareMemory;
 
 import java.io.*;
@@ -25,16 +27,28 @@ public class Write2File extends Thread {
 
     @Override
     public void run() {
-        FileOutputStream fos=null;
+
         try {
-           fos=new FileOutputStream(file);
+
             while (true){
 
                 while (hashMap.containsKey(waitingNum)){
                     DataPacket dataPacket=hashMap.get(waitingNum);
                     if (dataPacket.getDataSize()>0){
-                        fos.write(dataPacket.getDataBytes(),0,dataPacket.getDataSize());
-                        fos.flush();
+                        for (int i=0;i<Parameters.SPLIT;i++){
+                            if (i==9){
+                                byte[] temp=new byte[dataPacket.getDataSize()-dataPacket.getDataSize()/Parameters.SPLIT*(Parameters.SPLIT-1)];
+                                System.arraycopy(dataPacket.getDataBytes(),i*(dataPacket.getDataSize()/Parameters.SPLIT),temp,0,dataPacket.getDataSize()-dataPacket.getDataSize()/Parameters.SPLIT*(Parameters.SPLIT-1));
+                                int write = shareMemory.Write(temp, temp.length);
+                                System.out.println("包号： "+dataPacket.getTag()+"帧号： "+i+"帧长： "+write);
+                            }else {
+                                byte[] temp=new byte[dataPacket.getDataSize()/Parameters.SPLIT];
+                                System.arraycopy(dataPacket.getDataBytes(),i*(dataPacket.getDataSize()/Parameters.SPLIT),temp,0,dataPacket.getDataSize()/Parameters.SPLIT);
+                                int write = shareMemory.Write(temp, temp.length);
+                                System.out.println("包号： "+dataPacket.getTag()+"帧号： "+i+"帧长： "+write);
+                            }
+                            Thread.sleep(Parameters.WRITING_FREQ); //------------延时设置-------------
+                        }
                         shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
                         System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
                         hashMap.remove(waitingNum);
@@ -55,7 +69,7 @@ public class Write2File extends Thread {
             }
 
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
