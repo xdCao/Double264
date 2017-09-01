@@ -24,8 +24,9 @@ public class RecvingThread extends Thread {
     @Override
     public void run() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+
             while (true){
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 DataPacket dataPacket=(DataPacket)ois.readObject();
                 System.out.println("--------------------网络接受包序号："+dataPacket.getTag());
                 hashMap.put(dataPacket.getTag(),dataPacket);

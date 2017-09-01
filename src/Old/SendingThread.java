@@ -26,7 +26,7 @@ public class SendingThread extends Thread {
         ObjectOutputStream oos=null;
         try {
 
-            oos=new ObjectOutputStream(socket.getOutputStream());
+
             while (true) {
 
                 DataPacket dataPacket=null;
@@ -39,6 +39,7 @@ public class SendingThread extends Thread {
 
 
                 if (dataPacket!=null){
+                    oos=new ObjectOutputStream(socket.getOutputStream());
                     oos.writeObject(dataPacket);
                     oos.flush();
                     System.out.println("线程" + this.getId() + "发送对象： " + dataPacket.getTag());
