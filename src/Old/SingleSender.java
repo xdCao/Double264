@@ -33,7 +33,7 @@ public class SingleSender {
     }
 
     public void readByteFromMemory() {
-        new ReadMemoryThread(shareMemory,queue).start();
+//        new ReadMemoryThread(shareMemory,queue).start();
     }
 
     public void sendPacket2Air(){

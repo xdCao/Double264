@@ -26,7 +26,7 @@ public class PureReceiver {
         }
 
         try {
-            serverSocket=new ServerSocket(Parameters.PORT1);
+            serverSocket=new ServerSocket(Parameters.SINGLE_LINK_PORT);
             socket=serverSocket.accept();
             inputStream=socket.getInputStream();
             if (socket!=null){
