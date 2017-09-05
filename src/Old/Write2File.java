@@ -3,6 +3,8 @@ package Old;
 import com.pisoft.sharememory.ShareMemory;
 
 import java.io.*;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -28,31 +30,49 @@ public class Write2File extends Thread {
     @Override
     public void run() {
 
-        byte[] tempNormal=new byte[Parameters.memSize];
-        byte[] tempLast=new byte[Parameters.memSize];
+        Queue<DataPacket> queue1=new LinkedList<>();
+        Queue<DataPacket> queue2=new LinkedList<>();
+
+        int count=0;
 
         try {
 
             while (true){
 
                 while (hashMap.containsKey(waitingNum)){
-                    DataPacket dataPacket=hashMap.get(waitingNum);
+                    DataPacket dataPacket=hashMap.remove(waitingNum);
                     if (dataPacket.getDataSize()>0){
-//                        for (int i=0;i<Parameters.SPLIT;i++){
-//                            if (i==9){
-//                                System.arraycopy(dataPacket.getDataBytes(),i*(dataPacket.getDataSize()/Parameters.SPLIT),tempLast,0,dataPacket.getDataSize()-dataPacket.getDataSize()/Parameters.SPLIT*(Parameters.SPLIT-1));
-//                                int write = shareMemory.Write(tempLast, dataPacket.getDataSize()-dataPacket.getDataSize()/Parameters.SPLIT*(Parameters.SPLIT-1));
-//                                System.out.println("包号： "+dataPacket.getTag()+"帧号： "+i+"帧长： "+write);
-//                            }else {
-//                                System.arraycopy(dataPacket.getDataBytes(),i*(dataPacket.getDataSize()/Parameters.SPLIT),tempNormal,0,dataPacket.getDataSize()/Parameters.SPLIT);
-//                                int write = shareMemory.Write(tempNormal, dataPacket.getDataSize()/Parameters.SPLIT);
-//                                System.out.println("包号： "+dataPacket.getTag()+"帧号： "+i+"帧长： "+write);
-//                            }
-//                            Thread.sleep(Parameters.WRITING_FREQ); //------------延时设置-------------
-//                        }
-                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
-                        System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
-                        hashMap.remove(waitingNum);
+
+                        ////////////////////////////////////
+
+                        if (count%2==0){
+                            queue1.add(dataPacket);
+                        }else {
+                            queue2.add(dataPacket);
+                        }
+
+                        if (waitingNum%10==9){
+
+                            if (count%2==0){
+                                while (!queue1.isEmpty()){
+                                    DataPacket packet = queue1.poll();
+                                    shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+                                    System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+                                }
+                            }else {
+                                while (!queue2.isEmpty()){
+                                    DataPacket packet = queue2.poll();
+                                    shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+                                    System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+                                }
+                            }
+                            count++;
+                        }
+
+                        //////////////////////////////////
+
+//                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
+//                        System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
                     }
                     waitingNum++;
                 }
