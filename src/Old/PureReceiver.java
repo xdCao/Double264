@@ -46,7 +46,7 @@ public class PureReceiver {
             public void run() {
 
                 while (true){
-                    byte[] buffer=new byte[Parameters.memSize];
+                    byte[] buffer=new byte[1024*50];
                     try {
                         int read = inputStream.read(buffer, 0, inputStream.available());
                         if (read>0){

@@ -25,11 +25,11 @@ public class ReadMemoryThread extends Thread {
     @Override
     public void run() {
 
-        FileOutputStream fos=null;
+        RandomAccessFile raf=null;
 
         if (Parameters.IS_THREE_LINK){
             try {
-                fos=new FileOutputStream(videoFile);
+                raf=new RandomAccessFile(videoFile,"rw");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -37,7 +37,7 @@ public class ReadMemoryThread extends Thread {
 
         byte[] buffer = new byte[Parameters.memSize];
         int tag = 0;
-
+        int index=0;
 
         while (true) {
             byte[] buffer1 = new byte[1024 * 1024];
@@ -49,7 +49,6 @@ public class ReadMemoryThread extends Thread {
             while (count < 1)//拼接
             {
                 read = shareMemory.Read(buffer, Parameters.memSize);
-
                 System.arraycopy(buffer, 0, buffer1, length, read);
                 length = length + read;
                 count++;
@@ -65,9 +64,11 @@ public class ReadMemoryThread extends Thread {
                 tag++;
                 System.out.println("queue add new packet" + dataPacket.getTag());
 
-                if (fos!=null){
+                if (raf!=null){
                     try {
-                        fos.write(baos.toByteArray(),0,length);
+                        raf.seek(index);
+                        raf.write(baos.toByteArray(),0,length);
+                        index+=length;
                     } catch (IOException e) {
                         e.printStackTrace();
                         System.err.println("文件写入失败！");

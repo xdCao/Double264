@@ -19,18 +19,18 @@ public class ThirdLinkSendingThread extends Thread{
     @Override
     public void run() {
 
-        FileInputStream fis=null;
+        RandomAccessFile raf=null;
 
 
         if (videoFile!=null){
             try {
-                fis=new FileInputStream(videoFile);
+                raf=new RandomAccessFile(videoFile,"rw");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        if (fis!=null){
+        if (raf!=null){
 
             OutputStream outputStream=null;
 
@@ -41,18 +41,25 @@ public class ThirdLinkSendingThread extends Thread{
             }
 
             byte[] buffer=new byte[1024];
+            int count=0;
 
             while (true){
 
                 int read=0;
 
                 try {
-                    read = fis.read(buffer, 0, buffer.length);
+
+                    raf.seek(count*1024*50);
+                    read = raf.read(buffer,0,buffer.length);
+                    count++;
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     System.err.println("文件读取失败！");
                 }
+
                 System.out.println("read bytes from file : -----------------"+read);
+
                 if (read<=0){
                     break;
                 }
