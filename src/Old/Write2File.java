@@ -3,6 +3,7 @@ package Old;
 import com.pisoft.sharememory.ShareMemory;
 
 import java.io.*;
+import java.lang.annotation.ElementType;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,6 +33,7 @@ public class Write2File extends Thread {
 
         Queue<DataPacket> queue1=new LinkedList<>();
         Queue<DataPacket> queue2=new LinkedList<>();
+        Queue<DataPacket> queue3=new LinkedList<>();
 
         int count=0;
 
@@ -43,36 +45,92 @@ public class Write2File extends Thread {
                     DataPacket dataPacket=hashMap.remove(waitingNum);
                     if (dataPacket.getDataSize()>0){
 
-                        ////////////////////////////////////
+                        ////////////////////////////////////双队列缓存
 
-                        if (count%2==0){
+//                        if (count%2==0){
+//                            queue1.add(dataPacket);
+//                        }else {
+//                            queue2.add(dataPacket);
+//                        }
+//
+//                        if (waitingNum%10==9){
+//
+//                            if (count%2==0){
+//                                while (!queue1.isEmpty()){
+//                                    DataPacket packet = queue1.poll();
+//                                    shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+//                                    System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+//                                }
+//                            }else {
+//                                while (!queue2.isEmpty()){
+//                                    DataPacket packet = queue2.poll();
+//                                    shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+//                                    System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+//                                }
+//                            }
+//                            count++;
+//                        }
+
+                        /////////////////////////////////////////////////////////////////////////////////////
+
+                        //////////////////////////////////三队列缓存
+
+                        if (count%3==0){
                             queue1.add(dataPacket);
-                        }else {
+                        }else if (count%3==1){
                             queue2.add(dataPacket);
+                        }else {
+                            queue3.add(dataPacket);
                         }
 
-                        if (waitingNum%10==9){
+                        if (waitingNum%5==4){
+                            if (count==0){
 
-                            if (count%2==0){
+                            }else if (count==1){
                                 while (!queue1.isEmpty()){
                                     DataPacket packet = queue1.poll();
                                     shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
                                     System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
                                 }
-                            }else {
                                 while (!queue2.isEmpty()){
                                     DataPacket packet = queue2.poll();
                                     shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
                                     System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
                                 }
+                            }else {
+                                if (count%3==2){
+                                    while (!queue3.isEmpty()){
+                                        DataPacket packet = queue3.poll();
+                                        shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+                                        System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+                                    }
+                                }else if (count%3==1){
+                                    while (!queue2.isEmpty()){
+                                        DataPacket packet = queue2.poll();
+                                        shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+                                        System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+                                    }
+                                }else {
+                                    while (!queue1.isEmpty()){
+                                        DataPacket packet = queue1.poll();
+                                        shareMemory.Write(packet.getDataBytes(),packet.getDataSize());
+                                        System.out.println("第"+packet.getTag()+"个包写入完毕"+"size: "+packet.getDataSize());
+                                    }
+                                }
                             }
                             count++;
                         }
 
-                        //////////////////////////////////
+
+                        ////////////////////////////////////////////////////////////////////////////////////
+
+                        /////////////////////////////////////无缓存
 
 //                        shareMemory.Write(dataPacket.getDataBytes(),dataPacket.getDataSize());
 //                        System.out.println("第"+waitingNum+"个包写入完毕"+"size: "+dataPacket.getDataSize());
+
+                        ////////////////////////////////////////////////////////////////////////////////////
+
                     }
                     waitingNum++;
                 }

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7abf783-0a32-45fc-8b9b-4d66b5100eb8" name="Default" comment="三路同时传修正了一些bug">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Double264/src/Old/ReadRecordThread.java" />
+    <list default="true" id="c7abf783-0a32-45fc-8b9b-4d66b5100eb8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Double264/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Sender.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Sender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Utils.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/TestInternet/TestSender.java" afterPath="$PROJECT_DIR$/../Double264/src/TestInternet/TestSender.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../Double264/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parameters.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Parameters.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="418">
+              <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -99,6 +94,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Write2File.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="118" column="33" lean-forward="true" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ThirdLinkSendingThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../Double264/src/Old/ThirdLinkSendingThread.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -111,21 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadMemoryThread.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadMemoryThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+            <state relative-caret-position="114">
+              <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -176,7 +171,6 @@
         <option value="$PROJECT_DIR$/../Double264/src/Old/Recver.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/TheThirdReceiver.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/SingleSender.java" />
-        <option value="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/PureReceiver.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/ThirdLinkSendingThread.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/Utils.java" />
@@ -185,6 +179,7 @@
         <option value="$PROJECT_DIR$/../Double264/src/Old/ReadRecordThread.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java" />
+        <option value="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" />
       </list>
     </option>
   </component>
@@ -770,7 +765,7 @@
       <updated>1503748818287</updated>
       <workItem from="1503748822186" duration="31301000" />
       <workItem from="1504058182664" duration="42367000" />
-      <workItem from="1504763168025" duration="3538000" />
+      <workItem from="1504763168025" duration="4623000" />
     </task>
     <task id="LOCAL-00001" summary="construct">
       <created>1503752835383</created>
@@ -863,11 +858,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504664359145</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="新增录播发送代码">
+      <created>1504767624441</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1504767624441</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77206000" />
+    <option name="totallyTimeSpent" value="78291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1696" height="1026" extended-state="0" />
@@ -942,7 +944,8 @@
     <MESSAGE value="添加第三路，由于限制网速，可能导致内存溢出，因此不用集合，采用文件的形式来缓存数据" />
     <MESSAGE value="添加双缓存队列" />
     <MESSAGE value="三路同时传修正了一些bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="三路同时传修正了一些bug" />
+    <MESSAGE value="新增录播发送代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增录播发送代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1231,14 +1234,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1314,18 +1309,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
+    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="114">
+          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java">
+    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="339">
+          <caret line="118" column="33" lean-forward="true" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
           <folding />
         </state>
       </provider>
