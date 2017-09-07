@@ -40,7 +40,7 @@ public class ThirdLinkSendingThread extends Thread{
                 e.printStackTrace();
             }
 
-            byte[] buffer=new byte[1024];
+            byte[] buffer=new byte[1024*50];
             int count=0;
 
             while (true){

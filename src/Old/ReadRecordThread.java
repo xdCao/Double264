@@ -33,8 +33,8 @@ public class ReadRecordThread extends Thread{
             while (true) {
                 int read=0;
                 try {
-                    raf.seek(count*1024);
-                    read = raf.read(buffer,0,1024);
+                    raf.seek(count*1024*50);
+                    read = raf.read(buffer,0,1024*50);
                     if (read<=0){
                         break;
                     }else {
