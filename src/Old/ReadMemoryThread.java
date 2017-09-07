@@ -40,7 +40,7 @@ public class ReadMemoryThread extends Thread {
         int index=0;
 
         while (true) {
-            byte[] buffer1 = new byte[1024 * 1024];
+            byte[] buffer1 = new byte[Parameters.memSize];
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int count = 0;
             int length = 0;

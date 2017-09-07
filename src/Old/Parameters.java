@@ -20,6 +20,10 @@ public interface Parameters {
 
     int SINGLE_LINK_PORT=9997;
 
-    boolean IS_THREE_LINK=true;
+    boolean IS_THREE_LINK=false;
+
+    boolean IS_RECORD=true;
+
+    String RECORD_PATH="H:\\共享内存\\arm_demo_day_4K.264";
 
 }

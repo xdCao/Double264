@@ -21,7 +21,14 @@ public class TestSender {
     public static File videoFile=null;
 
     public void init(){
-        Utils.Init_shareMemory(shareMemory);
+
+        shareMemory=new ShareMemory();
+        int ret=shareMemory.Init(Parameters.MEMORY_NAME,true,Parameters.timeOut,Parameters.memSize);
+        if (ret<0){
+            System.err.println("共享内存出错");
+        }
+
+
         try {
             socket=new Socket(Parameters.SINGLE_LINK_IP,Parameters.SINGLE_LINK_PORT);
             videoFile=new File("video.264");
