@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7abf783-0a32-45fc-8b9b-4d66b5100eb8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Double264/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" afterPath="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../Double264/out/" />
@@ -52,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parameters.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Parameters.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+            <state relative-caret-position="532">
+              <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -94,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Write2File.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Write2File.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="118" column="33" lean-forward="true" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+            <state relative-caret-position="2299">
+              <caret line="127" column="59" lean-forward="true" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -177,8 +177,8 @@
         <option value="$PROJECT_DIR$/../Double264/src/TestInternet/TestSender.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/Sender.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/ReadRecordThread.java" />
-        <option value="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/ReadMemoryThread.java" />
+        <option value="$PROJECT_DIR$/../Double264/src/Old/Parameters.java" />
         <option value="$PROJECT_DIR$/../Double264/src/Old/Write2File.java" />
       </list>
     </option>
@@ -765,7 +765,7 @@
       <updated>1503748818287</updated>
       <workItem from="1503748822186" duration="31301000" />
       <workItem from="1504058182664" duration="42367000" />
-      <workItem from="1504763168025" duration="4623000" />
+      <workItem from="1504763168025" duration="4850000" />
     </task>
     <task id="LOCAL-00001" summary="construct">
       <created>1503752835383</created>
@@ -865,11 +865,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504767624441</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="三队列缓存">
+      <created>1504768701348</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1504768701348</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78291000" />
+    <option name="totallyTimeSpent" value="78518000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1696" height="1026" extended-state="0" />
@@ -945,7 +952,8 @@
     <MESSAGE value="添加双缓存队列" />
     <MESSAGE value="三路同时传修正了一些bug" />
     <MESSAGE value="新增录播发送代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增录播发送代码" />
+    <MESSAGE value="三队列缓存" />
+    <option name="LAST_COMMIT_MESSAGE" value="三队列缓存" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1103,6 +1111,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18278">
           <caret line="962" column="19" lean-forward="false" selection-start-line="962" selection-start-column="19" selection-end-line="962" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#262622#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#30335#30336#0" expanded="false" />
+            <element signature="e#30400#30401#0" expanded="false" />
+            <element signature="e#32334#32335#0" expanded="false" />
+            <element signature="e#32385#32386#0" expanded="false" />
+            <element signature="e#39094#39095#0" expanded="false" />
+            <element signature="e#39146#39147#0" expanded="false" />
+            <element signature="e#40959#40960#0" expanded="false" />
+            <element signature="e#41034#41035#0" expanded="false" />
+            <element signature="e#44347#44348#0" expanded="false" />
+            <element signature="e#44395#44396#0" expanded="false" />
+            <element signature="e#48122#48123#0" expanded="false" />
+            <element signature="e#48173#48174#0" expanded="false" />
+            <element signature="e#65240#65241#0" expanded="false" />
+            <element signature="e#65287#65288#0" expanded="false" />
+            <element signature="e#88654#88655#0" expanded="false" />
+            <element signature="e#88697#88698#0" expanded="false" />
+            <element signature="e#93306#93307#0" expanded="false" />
+            <element signature="e#93363#93364#0" expanded="false" />
+            <element signature="e#93406#93407#0" expanded="false" />
+            <element signature="e#93441#93442#0" expanded="false" />
+            <element signature="e#93710#93711#0" expanded="false" />
+            <element signature="e#93797#93798#0" expanded="false" />
+            <element signature="e#112403#112404#0" expanded="false" />
+            <element signature="e#112458#112459#0" expanded="false" />
+            <element signature="e#117483#117484#0" expanded="false" />
+            <element signature="e#117520#117521#0" expanded="false" />
+            <element signature="e#146809#146810#0" expanded="false" />
+            <element signature="e#146884#146885#0" expanded="false" />
+            <element signature="e#192348#192349#0" expanded="false" />
+            <element signature="e#192399#192400#0" expanded="false" />
+            <element signature="e#193040#193041#0" expanded="false" />
+            <element signature="e#193105#193106#0" expanded="false" />
+            <element signature="e#193170#193171#0" expanded="false" />
+            <element signature="e#193235#193236#0" expanded="false" />
+            <element signature="e#195463#195464#0" expanded="false" />
+            <element signature="e#195545#195546#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1136,6 +1184,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="695" column="29" lean-forward="false" selection-start-line="695" selection-start-column="29" selection-end-line="695" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1167,6 +1216,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16834">
           <caret line="962" column="19" lean-forward="false" selection-start-line="962" selection-start-column="19" selection-end-line="962" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#262622#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#30335#30336#0" expanded="false" />
+            <element signature="e#30400#30401#0" expanded="false" />
+            <element signature="e#32334#32335#0" expanded="false" />
+            <element signature="e#32385#32386#0" expanded="false" />
+            <element signature="e#39094#39095#0" expanded="false" />
+            <element signature="e#39146#39147#0" expanded="false" />
+            <element signature="e#40959#40960#0" expanded="false" />
+            <element signature="e#41034#41035#0" expanded="false" />
+            <element signature="e#44347#44348#0" expanded="false" />
+            <element signature="e#44395#44396#0" expanded="false" />
+            <element signature="e#48122#48123#0" expanded="false" />
+            <element signature="e#48173#48174#0" expanded="false" />
+            <element signature="e#65240#65241#0" expanded="false" />
+            <element signature="e#65287#65288#0" expanded="false" />
+            <element signature="e#88654#88655#0" expanded="false" />
+            <element signature="e#88697#88698#0" expanded="false" />
+            <element signature="e#93306#93307#0" expanded="false" />
+            <element signature="e#93363#93364#0" expanded="false" />
+            <element signature="e#93406#93407#0" expanded="false" />
+            <element signature="e#93441#93442#0" expanded="false" />
+            <element signature="e#93710#93711#0" expanded="false" />
+            <element signature="e#93797#93798#0" expanded="false" />
+            <element signature="e#112403#112404#0" expanded="false" />
+            <element signature="e#112458#112459#0" expanded="false" />
+            <element signature="e#117483#117484#0" expanded="false" />
+            <element signature="e#117520#117521#0" expanded="false" />
+            <element signature="e#146809#146810#0" expanded="false" />
+            <element signature="e#146884#146885#0" expanded="false" />
+            <element signature="e#192348#192349#0" expanded="false" />
+            <element signature="e#192399#192400#0" expanded="false" />
+            <element signature="e#193040#193041#0" expanded="false" />
+            <element signature="e#193105#193106#0" expanded="false" />
+            <element signature="e#193170#193171#0" expanded="false" />
+            <element signature="e#193235#193236#0" expanded="false" />
+            <element signature="e#195463#195464#0" expanded="false" />
+            <element signature="e#195545#195546#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1317,18 +1406,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
+    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="118" column="33" lean-forward="true" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
+        <state relative-caret-position="532">
+          <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Parameters.java">
+    <entry file="file://$PROJECT_DIR$/../Double264/src/Old/Write2File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        <state relative-caret-position="2299">
+          <caret line="127" column="59" lean-forward="true" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="59" />
           <folding />
         </state>
       </provider>

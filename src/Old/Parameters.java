@@ -26,4 +26,7 @@ public interface Parameters {
 
     String RECORD_PATH="H:\\共享内存\\arm_demo_day_4K.264";
 
+    int CACHE_QUEUE_NUM=3;
+
+
 }
