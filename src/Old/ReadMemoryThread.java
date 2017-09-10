@@ -64,6 +64,16 @@ public class ReadMemoryThread extends Thread {
                 tag++;
                 System.out.println("queue add new packet" + dataPacket.getTag());
 
+
+                synchronized (queue){
+                    try {
+                        queue.notifyAll();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+
                 if (raf!=null){
                     try {
                         raf.seek(index);

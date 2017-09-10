@@ -51,7 +51,7 @@ public class ReadRecordThread extends Thread{
                     dataPacket.setDataBytes(buffer);
                     queue.add(dataPacket);
                     tag++;
-                    System.out.println("queue add new packet" + dataPacket.getTag());
+                    System.out.println("queue add new packet" + dataPacket.getTag()+"size: "+dataPacket.getDataSize());
                 }
 
 

@@ -45,11 +45,15 @@ public class SendingThread extends Thread {
                     System.out.println("线程" + this.getId() + "发送对象： " + dataPacket.getTag());
                 }
 
-//                try {
-//                    Thread.sleep(10);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
+                synchronized (concurrentLinkedQueue)
+                {
+                    try {
+                        concurrentLinkedQueue.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
 
             }
         } catch (IOException e) {
